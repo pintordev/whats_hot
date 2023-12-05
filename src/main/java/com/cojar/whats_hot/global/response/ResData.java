@@ -1,12 +1,13 @@
 package com.cojar.whats_hot.global.response;
 
-import com.cojar.whats_hot.index.IndexController;
+import com.cojar.whats_hot.index.controller.IndexController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 
 import java.net.URI;
@@ -25,9 +26,9 @@ public class ResData<T> extends RepresentationModel {
     private final T data;
 
     public ResData(HttpStatus status,
-                     String code,
-                     String message,
-                     T data) {
+                   String code,
+                   String message,
+                   T data) {
         this.status = status;
         this.success = status.is2xxSuccessful();
         this.code = code;
@@ -39,22 +40,17 @@ public class ResData<T> extends RepresentationModel {
                                     String code,
                                     String message,
                                     T data,
-                                    Class<?> controller,
-                                    Object pathVariable) {
+                                    ResponseEntity method) {
 
         ResData resData = new ResData<>(status, code, message, data);
 
         if (data instanceof Errors) {
             resData.add(linkTo(methodOn(IndexController.class).index()).withRel("index"));
-            return resData;
         }
 
-        // self 링크 추가
-        if (pathVariable != null) {
-            resData.add(linkTo(controller).slash(pathVariable.toString()).withSelfRel());
-        } else {
-            resData.add(linkTo(controller).withSelfRel());
-        }
+        if (method == null) return resData;
+
+        resData.add(linkTo(method).withSelfRel());
 
         return resData;
     }
@@ -62,16 +58,17 @@ public class ResData<T> extends RepresentationModel {
     public static <T> ResData<T> of(HttpStatus status,
                                     String code,
                                     String message,
-                                    T data,
-                                    Class<?> controller) {
-        return ResData.of(status, code, message, data, controller, null);
+                                    T data) {
+
+        return ResData.of(status, code, message, data, null);
     }
 
     public static <T> ResData<T> of(HttpStatus status,
                                     String code,
                                     String message,
-                                    T data) {
-        return ResData.of(status, code, message, data, null, null);
+                                    ResponseEntity method) {
+
+        return ResData.of(status, code, message, null, method);
     }
 
     @JsonIgnore

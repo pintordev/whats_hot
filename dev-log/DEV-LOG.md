@@ -5,3 +5,4 @@
 - [x] base - global 파트 작업
 - [x] base - global 파트 작업; test
 - [x] base - global 파트 작업; resData에 success 여부 포함
+- [x] Swagger 문서 작업 세팅, IndexController에 대한 문서 작업

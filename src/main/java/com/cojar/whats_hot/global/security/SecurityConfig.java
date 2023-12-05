@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -21,8 +22,8 @@ public class SecurityConfig {
         http
                 .securityMatcher("/api/**") // 아래의 모든 설정 /api/** 경로에만 적용
                 .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
-//                        .requestMatchers(HttpMethod.GET, "/api").permitAll() // get:/api 아무나 접속 가능
-//                        .requestMatchers(HttpMethod.GET, "/api/events").permitAll() // get:/api/events 아무나 접속 가능
+                        .requestMatchers(HttpMethod.GET, "/api/index").permitAll() // get:/api 아무나 접속 가능
+//                        .requestMatchers(HttpMethod.GET, "/api/events").permitAll() // get:/api/events s아무나 접속 가능
 //                        .requestMatchers(HttpMethod.GET, "/api/events/*").permitAll() // get:/api/events/# 아무나 접속 가능
                         .anyRequest().authenticated()) // 그 외는 인증된 사용자만 접속 가능
                 .cors(cors -> cors
