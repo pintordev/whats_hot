@@ -2,8 +2,7 @@ package com.cojar.whats_hot.global.response;
 
 import com.cojar.whats_hot.index.IndexController;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
@@ -15,14 +14,26 @@ import java.net.URI;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 public class ResData<T> extends RepresentationModel {
 
     private final HttpStatus status;
+    private final boolean success;
     private final String code;
     private final String message;
     private final T data;
+
+    public ResData(HttpStatus status,
+                     String code,
+                     String message,
+                     T data) {
+        this.status = status;
+        this.success = status.is2xxSuccessful();
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
 
     public static <T> ResData<T> of(HttpStatus status,
                                     String code,
