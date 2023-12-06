@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Tag(name = "Index", description = "API 인덱스")
 @RequestMapping(produces = MediaTypes.HAL_JSON_VALUE)
@@ -27,9 +27,9 @@ public class IndexController {
                 HttpStatus.OK,
                 "S-00-00",
                 "인덱스 링크 목록을 반환합니다",
-                methodOn(IndexController.class).index()
+                linkTo(this.getClass()).slash("api/index")
         );
-        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Index/index").withRel("profile"));
+        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html").withRel("profile"));
         return ResponseEntity.ok()
                 .body(resData);
     }

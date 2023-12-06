@@ -7,6 +7,16 @@ import lombok.Getter;
 public class MemberRequest {
 
     @Getter
+    public static class Signup {
+
+        @NotBlank
+        private String username;
+
+        @NotBlank
+        private String password;
+    }
+
+    @Getter
     public static class Login {
 
         @NotBlank
@@ -28,4 +38,6 @@ public class MemberRequest {
         @NotBlank
         private String newPasswordConfirm;
     }
+
+
 }

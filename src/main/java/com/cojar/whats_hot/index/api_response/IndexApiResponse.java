@@ -37,7 +37,7 @@ public @interface IndexApiResponse {
                                                     "href": "http://localhost:8080/api/index"
                                                 },
                                                 "profile": {
-                                                    "href": "http://localhost:8080/swagger-ui/index.html#/Index/index"
+                                                    "href": "http://localhost:8080/swagger-ui/index.html"
                                                 }
                                              }
                                             }

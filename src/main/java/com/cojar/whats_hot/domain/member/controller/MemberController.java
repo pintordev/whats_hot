@@ -3,11 +3,13 @@ package com.cojar.whats_hot.domain.member.controller;
 import com.cojar.whats_hot.domain.member.api_response.MemberApiResponse;
 import com.cojar.whats_hot.domain.member.dto.MemberDto;
 import com.cojar.whats_hot.domain.member.entity.Member;
+import com.cojar.whats_hot.domain.member.entity.MemberRole;
 import com.cojar.whats_hot.domain.member.request.MemberRequest;
 import com.cojar.whats_hot.domain.member.response.MemberResponse;
 import com.cojar.whats_hot.domain.member.service.MemberService;
 import com.cojar.whats_hot.global.response.ResData;
 import com.cojar.whats_hot.global.util.AppConfig;
+import com.cojar.whats_hot.index.controller.IndexController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Tag(name = "Member", description = "API 인덱스")
 @RequestMapping(value = "/api/members", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaTypes.HAL_JSON_VALUE)
@@ -30,6 +34,24 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @MemberApiResponse.Signup
+    @PostMapping(value = "/signup")
+    public ResponseEntity signup(@Valid @RequestBody MemberRequest.Signup signup, Errors errors) {
+
+        Member member = this.memberService.signup("aa", "aaa", "aaaa", List.of(MemberRole.USER));
+
+        ResData resData = ResData.of(
+                HttpStatus.CREATED,
+                "S-01-01",
+                "회원가입을 완료했습니다",
+                "",
+                linkTo(this.getClass()).slash("login")
+        );
+        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/signup").withRel("profile"));
+        return ResponseEntity.created(linkTo(this.getClass()).slash("me").toUri())
+                .body(resData);
+    }
 
     @MemberApiResponse.Login
     @PostMapping(value = "/login")
@@ -42,10 +64,10 @@ public class MemberController {
 
         resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-01",
+                "S-01-02",
                 "액세스 토큰이 생성되었습니다",
                 new MemberResponse.Login(accessToken),
-                methodOn(this.getClass()).login(loginReq, errors)
+                linkTo(IndexController.class).slash("/api/index")
         );
         resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/login").withRel("profile"));
         return ResponseEntity.ok()
@@ -60,10 +82,10 @@ public class MemberController {
 
         ResData resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-02",
+                "S-01-03",
                 "로그인된 회원 정보를 반환합니다",
                 new MemberResponse.Me(MemberDto.of(member)),
-                methodOn(this.getClass()).me(user)
+                linkTo(this.getClass()).slash("me")
         );
         resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/me").withRel("profile"));
         return ResponseEntity.ok()
@@ -76,9 +98,9 @@ public class MemberController {
 
         ResData resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-03",
+                "S-01-04",
                 "비밀번호 변경을 완료했습니다",
-                methodOn(this.getClass()).me(user)
+                linkTo(this.getClass()).slash("me")
         );
         resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/updatePassword").withRel("profile"));
         return ResponseEntity.ok()

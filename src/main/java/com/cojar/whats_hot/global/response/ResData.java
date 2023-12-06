@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 
 import java.net.URI;
@@ -40,7 +40,7 @@ public class ResData<T> extends RepresentationModel {
                                     String code,
                                     String message,
                                     T data,
-                                    ResponseEntity method) {
+                                    WebMvcLinkBuilder selfLink) {
 
         ResData resData = new ResData<>(status, code, message, data);
 
@@ -48,9 +48,9 @@ public class ResData<T> extends RepresentationModel {
             resData.add(linkTo(methodOn(IndexController.class).index()).withRel("index"));
         }
 
-        if (method == null) return resData;
+        if (selfLink == null) return resData;
 
-        resData.add(linkTo(method).withSelfRel());
+        resData.add(selfLink.withSelfRel());
 
         return resData;
     }
@@ -73,9 +73,9 @@ public class ResData<T> extends RepresentationModel {
     public static <T> ResData<T> of(HttpStatus status,
                                     String code,
                                     String message,
-                                    ResponseEntity method) {
+                                    WebMvcLinkBuilder selfLink) {
 
-        return ResData.of(status, code, message, null, method);
+        return ResData.of(status, code, message, null, selfLink);
     }
 
     @JsonIgnore
