@@ -86,6 +86,21 @@ public class MemberService {
         Member member = this.memberRepository.findByUsername(loginReq.getUsername())
                 .orElse(null);
 
+        member = member.toBuilder()
+                .isLogout(false)
+                .build();
+
+        this.memberRepository.save(member);
+
         return this.jwtProvider.genToken(member.toClaims(), 60 * 60 * 24 * 365); // 1년 유효 토큰 생성
+    }
+
+    public void logout(Member member) {
+
+        member = member.toBuilder()
+                .isLogout(true)
+                .build();
+
+        this.memberRepository.save(member);
     }
 }

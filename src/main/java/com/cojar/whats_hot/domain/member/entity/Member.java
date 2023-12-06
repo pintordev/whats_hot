@@ -32,6 +32,8 @@ public class Member extends BaseEntity {
     @Enumerated(value = EnumType.STRING)
     private List<MemberRole> authorities;
 
+    public boolean isLogout;
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         return this.authorities.stream()

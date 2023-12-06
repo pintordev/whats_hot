@@ -7,6 +7,7 @@
 - [x] /api/member/signup 응답 및 api 문서 작업
 - [x] get:/api/member/me/username 응답 및 api 문서 작업
 - [x] 아이디/비밀번호 찾기 엔드포인트 수정, 응답, api 문서 작업
+- [x] 로그아웃 응담 및 api 문서 작업, 비밀번호 변경 patch로 수정
 
 ## 23-12-05
 - [x] base - 프로젝트 세팅

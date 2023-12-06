@@ -74,6 +74,24 @@ public class MemberController {
                 .body(resData);
     }
 
+    @MemberApiResponse.Logout
+    @PostMapping(value = "/logout", consumes = MediaType.ALL_VALUE)
+    public ResponseEntity logout(@AuthenticationPrincipal User user) {
+
+        Member member = this.memberService.getUserByUsername(user.getUsername());
+        this.memberService.logout(member);
+
+        ResData resData = ResData.of(
+                HttpStatus.OK,
+                "S-01-03",
+                "로그아웃이 완료되었습니다",
+                linkTo(IndexController.class).slash("/api/index")
+        );
+        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/logout").withRel("profile"));
+        return ResponseEntity.ok()
+                .body(resData);
+    }
+
     @MemberApiResponse.Me
     @GetMapping(value = "/me", consumes = MediaType.ALL_VALUE)
     public ResponseEntity me(@AuthenticationPrincipal User user) {
@@ -82,7 +100,7 @@ public class MemberController {
 
         ResData resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-03",
+                "S-01-04",
                 "로그인된 회원 정보를 반환합니다",
                 new MemberResponse.Me(MemberDto.of(member)),
                 linkTo(this.getClass()).slash("me")
@@ -93,12 +111,12 @@ public class MemberController {
     }
 
     @MemberApiResponse.UpdatePassword
-    @PutMapping(value = "/me/password")
+    @PatchMapping(value = "/password")
     public ResponseEntity updatePassword(@Valid @RequestBody MemberRequest.UpdatePassword updatePassword, @AuthenticationPrincipal User user) {
 
         ResData resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-04",
+                "S-01-05",
                 "비밀번호 변경을 완료했습니다",
                 linkTo(this.getClass()).slash("me")
         );
@@ -115,7 +133,7 @@ public class MemberController {
 
         ResData resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-05",
+                "S-01-06",
                 "요청하신 아이디를 반환합니다",
                 new MemberResponse.FindUsername(username),
                 linkTo(this.getClass()).slash("login")
@@ -131,7 +149,7 @@ public class MemberController {
 
         ResData resData = ResData.of(
                 HttpStatus.OK,
-                "S-01-06",
+                "S-01-07",
                 "이메일로 임시비밀번호를 발송했습니다",
                 linkTo(this.getClass()).slash("login")
         );

@@ -42,7 +42,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 Member member = this.memberRepository.findById(id)
                         .orElseThrow(() -> new DataNotFoundException("user not found on id " + id)); // member 가져옴
 
-                this.forceAuthentication(member); // 강제 인증 할당
+                if (!member.isLogout) this.forceAuthentication(member); // 강제 인증 할당
             }
 
         }

@@ -92,6 +92,42 @@ public @interface MemberApiResponse {
     @Target({ElementType.METHOD})
     @Retention(RetentionPolicy.RUNTIME)
     @Operation(
+            summary = "회원 로그아웃",
+            description = "성공 시 회원을 로그아웃 상태로 변경한다",
+            security = @SecurityRequirement(name = "bearerAuth"),
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "정상 응답",
+                            content = @Content(mediaType = MediaTypes.HAL_JSON_VALUE,
+                                    schema = @Schema(implementation = ResData.class),
+                                    examples = @ExampleObject(value = """
+                                            {
+                                                "status": "OK",
+                                                "success": true,
+                                                "code": "S-01-03",
+                                                "message": "로그아웃이 완료되었습니다",
+                                                "_links": {
+                                                    "self": {
+                                                        "href": "http://localhost:8080/api/index"
+                                                    },
+                                                    "profile": {
+                                                        "href": "http://localhost:8080/swagger-ui/index.html#/Member/logout"
+                                                    }
+                                                }
+                                            }
+                                            """
+                                    )
+                            )
+                    )
+            }
+    )
+    public @interface Logout {
+    }
+
+    @Target({ElementType.METHOD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(
             summary = "회원 정보 조회",
             description = "현재 로그인된 회원 정보를 반환한다",
             security = @SecurityRequirement(name = "bearerAuth"),
@@ -105,7 +141,7 @@ public @interface MemberApiResponse {
                                             {
                                                 "status": "OK",
                                                 "success": true,
-                                                "code": "S-01-03",
+                                                "code": "S-01-04",
                                                 "message": "로그인된 회원 정보를 반환합니다",
                                                 "data": {
                                                     "id": 1,
@@ -151,7 +187,7 @@ public @interface MemberApiResponse {
                                             {
                                                 "status": "OK",
                                                 "success": true,
-                                                "code": "S-01-04",
+                                                "code": "S-01-05",
                                                 "message": "비밀번호 변경을 완료했습니다",
                                                 "_links": {
                                                     "self": {
@@ -186,7 +222,7 @@ public @interface MemberApiResponse {
                                             {
                                                 "status": "OK",
                                                 "success": true,
-                                                "code": "S-01-05",
+                                                "code": "S-01-06",
                                                 "message": "요청하신 아이디를 반환합니다",
                                                 "data": {
                                                     "username": "user"
@@ -224,7 +260,7 @@ public @interface MemberApiResponse {
                                             {
                                                 "status": "OK",
                                                 "success": true,
-                                                "code": "S-01-06",
+                                                "code": "S-01-07",
                                                 "message": "이메일로 임시비밀번호를 발송했습니다",
                                                 "_links": {
                                                     "self": {
