@@ -1,0 +1,30 @@
+# INCLUDING PROFILE
+spring.profiles.active=dev
+
+#JPA
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.properties.hibernate.show_sql=true
+spring.jpa.properties.hibernate.use_sql_comments=true
+spring.jpa.properties.hibernate.default_batch_fetch_size=1000
+
+# LOG
+logging.level.com.cojar.whats_hot=debug
+logging.level.org.hibernate.SQL=debug
+logging.level.org.hibernate.orm.jdbc.bind=trace
+logging.level.org.hibernate.orm.jdbc.extract=trace
+
+# UTF-8
+server.servlet.encoding.charset=UTF-8
+server.servlet.encoding.force=true
+
+# UNKNOWN PROPERTIES
+spring.jackson.deserialization.fail-on-unknown-properties=true
+
+# SPRING DOC
+springdoc.api-docs.enabled=true
+springdoc.api-docs.path=/v3/api-docs
+springdoc.swagger-ui.enabled=true
+springdoc.swagger-ui.path=/swagger-ui.html
+
+# JWT
+custom.jwt.secretKey={secretKey}
