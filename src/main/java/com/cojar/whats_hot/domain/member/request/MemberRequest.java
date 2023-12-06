@@ -14,6 +14,12 @@ public class MemberRequest {
 
         @NotBlank
         private String password;
+
+        @NotBlank
+        private String passwordConfirm;
+
+        @NotBlank
+        private String email;
     }
 
     @Getter
@@ -38,6 +44,4 @@ public class MemberRequest {
         @NotBlank
         private String newPasswordConfirm;
     }
-
-
 }

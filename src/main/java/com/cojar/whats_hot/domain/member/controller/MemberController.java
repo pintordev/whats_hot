@@ -107,4 +107,22 @@ public class MemberController {
                 .body(resData);
     }
 
+    @MemberApiResponse.FindUsername
+    @GetMapping(value = "/me/username", consumes = MediaType.ALL_VALUE)
+    public ResponseEntity findUsername(@RequestParam(value = "email", required = true) String email) {
+
+        String username = "user";
+
+        ResData resData = ResData.of(
+                HttpStatus.OK,
+                "S-01-05",
+                "요청하신 아이디를 반환합니다",
+                new MemberResponse.FindUsername(username),
+                linkTo(this.getClass()).slash("login")
+        );
+        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/findUsername").withRel("profile"));
+        return ResponseEntity.ok()
+                .body(resData);
+    }
+
 }

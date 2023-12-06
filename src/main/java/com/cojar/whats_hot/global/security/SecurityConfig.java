@@ -29,6 +29,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/index").permitAll() // get:/api/index 아무나 접속 가능
                         .requestMatchers(HttpMethod.POST, "/api/members/signup").permitAll() // post:/api/members/signup 아무나 접속 가능
                         .requestMatchers(HttpMethod.POST, "/api/members/login").permitAll() // post:/api/members/login 아무나 접속 가능
+                        .requestMatchers(HttpMethod.GET, "/api/members/me/username").permitAll() // post:/api/members/me/username 아무나 접속 가능
 //                        .requestMatchers(HttpMethod.GET, "/api/events").permitAll() // get:/api/events 아무나 접속 가능
 //                        .requestMatchers(HttpMethod.GET, "/api/events/*").permitAll() // get:/api/events/# 아무나 접속 가능
                         .anyRequest().authenticated()) // 그 외는 인증된 사용자만 접속 가능

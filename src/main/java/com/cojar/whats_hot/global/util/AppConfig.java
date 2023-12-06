@@ -1,13 +1,11 @@
 package com.cojar.whats_hot.global.util;
 
-import com.cojar.whats_hot.domain.member.entity.Member;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -54,10 +52,5 @@ public class AppConfig {
         } catch (JsonProcessingException e) {
             return null;
         }
-    }
-
-    public static User toUser(Member member) {
-
-        return new User(member.getUsername(), member.getPassword(), member.getAuthorities());
     }
 }

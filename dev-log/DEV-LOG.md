@@ -5,6 +5,7 @@
 - [x] /api/member/me 응답 및 api 문서 작업
 - [x] /api/member/me/password 응답 및 api 문서 작업
 - [x] /api/member/signup 응답 및 api 문서 작업
+- [x] get:/api/member/me/username 응답 및 api 문서 작업
 
 ## 23-12-05
 - [x] base - 프로젝트 세팅

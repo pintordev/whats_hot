@@ -170,4 +170,42 @@ public @interface MemberApiResponse {
     )
     public @interface UpdatePassword {
     }
+
+    @Target({ElementType.METHOD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(
+            summary = "회원 아이디 찾기",
+            description = "아이디 찾기 성공 시 회원의 아이디를 반환한다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "정상 응답",
+                            content = @Content(mediaType = MediaTypes.HAL_JSON_VALUE,
+                                    schema = @Schema(implementation = ResData.class),
+                                    examples = @ExampleObject(value = """
+                                            {
+                                                "status": "OK",
+                                                "success": true,
+                                                "code": "S-01-05",
+                                                "message": "요청하신 아이디를 반환합니다",
+                                                "data": {
+                                                    "username": "user"
+                                                },
+                                                "_links": {
+                                                    "self": {
+                                                        "href": "http://localhost:8080/api/members/login"
+                                                    },
+                                                    "profile": {
+                                                        "href": "http://localhost:8080/swagger-ui/index.html#/Member/findUsername"
+                                                    }
+                                                }
+                                            }
+                                            """
+                                    )
+                            )
+                    )
+            }
+    )
+    public @interface FindUsername {
+    }
 }

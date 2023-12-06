@@ -21,4 +21,11 @@ public class MemberResponse {
         @JsonUnwrapped
         private final MemberDto memberDto;
     }
+
+    @Getter
+    @AllArgsConstructor
+    public static class FindUsername {
+
+        private final String username;
+    }
 }
