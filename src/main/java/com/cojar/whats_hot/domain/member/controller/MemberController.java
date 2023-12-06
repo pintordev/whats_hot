@@ -108,8 +108,8 @@ public class MemberController {
     }
 
     @MemberApiResponse.FindUsername
-    @GetMapping(value = "/me/username", consumes = MediaType.ALL_VALUE)
-    public ResponseEntity findUsername(@RequestParam(value = "email", required = true) String email) {
+    @PostMapping(value = "/username")
+    public ResponseEntity findUsername(@Valid @RequestBody MemberRequest.FindUsername findUsername) {
 
         String username = "user";
 
@@ -124,5 +124,21 @@ public class MemberController {
         return ResponseEntity.ok()
                 .body(resData);
     }
+
+    @MemberApiResponse.FindPassword
+    @PostMapping(value = "/password")
+    public ResponseEntity findPassword(@Valid @RequestBody MemberRequest.FindPassword findPassword) {
+
+        ResData resData = ResData.of(
+                HttpStatus.OK,
+                "S-01-06",
+                "이메일로 임시비밀번호를 발송했습니다",
+                linkTo(this.getClass()).slash("login")
+        );
+        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/findPassword").withRel("profile"));
+        return ResponseEntity.ok()
+                .body(resData);
+    }
+
 
 }

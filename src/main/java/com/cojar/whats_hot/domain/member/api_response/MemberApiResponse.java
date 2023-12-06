@@ -208,4 +208,39 @@ public @interface MemberApiResponse {
     )
     public @interface FindUsername {
     }
+
+    @Target({ElementType.METHOD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(
+            summary = "회원 비밀번호 찾기",
+            description = "비밀번호 찾기 성공 시 임시비밀번호를 부여하고 메일로 발송한다",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "정상 응답",
+                            content = @Content(mediaType = MediaTypes.HAL_JSON_VALUE,
+                                    schema = @Schema(implementation = ResData.class),
+                                    examples = @ExampleObject(value = """
+                                            {
+                                                "status": "OK",
+                                                "success": true,
+                                                "code": "S-01-06",
+                                                "message": "이메일로 임시비밀번호를 발송했습니다",
+                                                "_links": {
+                                                    "self": {
+                                                        "href": "http://localhost:8080/api/members/login"
+                                                    },
+                                                    "profile": {
+                                                        "href": "http://localhost:8080/swagger-ui/index.html#/Member/findPassword"
+                                                    }
+                                                }
+                                            }
+                                            """
+                                    )
+                            )
+                    )
+            }
+    )
+    public @interface FindPassword {
+    }
 }

@@ -44,4 +44,21 @@ public class MemberRequest {
         @NotBlank
         private String newPasswordConfirm;
     }
+
+    @Getter
+    public static class FindUsername {
+
+        @NotBlank
+        private String email;
+    }
+
+    @Getter
+    public static class FindPassword {
+
+        @NotBlank
+        private String username;
+
+        @NotBlank
+        private String email;
+    }
 }
