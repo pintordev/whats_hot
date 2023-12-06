@@ -21,6 +21,7 @@ public class InitConfig {
         return args -> {
             if (this.memberService.hasNoMember()) {
                 Member admin = this.memberService.signup("admin", "1234", "admin@test.com", List.of(MemberRole.ADMIN, MemberRole.USER));
+                Member user1 = this.memberService.signup("user1", "1234", "user1@test.com", List.of(MemberRole.USER));
             }
         };
     }

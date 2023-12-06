@@ -72,6 +72,7 @@ public class MemberService {
         Member member = Member.builder()
                 .username(username)
                 .password(this.passwordEncoder.encode(password))
+                .email(email)
                 .authorities(authorities)
                 .build();
 

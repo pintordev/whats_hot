@@ -37,7 +37,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
             if (this.jwtProvider.verify(accessToken)) { // 토큰 검증
 
-                Long id = (Long) this.jwtProvider.getClaims(accessToken).get("id"); // username 추출
+                long id = (int) this.jwtProvider.getClaims(accessToken).get("id"); // username 추출
 
                 Member member = this.memberRepository.findById(id)
                         .orElseThrow(() -> new DataNotFoundException("user not found on id " + id)); // member 가져옴

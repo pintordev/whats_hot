@@ -1,10 +1,12 @@
 package com.cojar.whats_hot.domain.member.dto;
 
 import com.cojar.whats_hot.domain.member.entity.Member;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
 public class MemberDto {
 
     private final Long id;
