@@ -57,6 +57,13 @@ public class ResData<T> extends RepresentationModel {
 
     public static <T> ResData<T> of(HttpStatus status,
                                     String code,
+                                    String message) {
+
+        return ResData.of(status, code, message, null, null);
+    }
+
+    public static <T> ResData<T> of(HttpStatus status,
+                                    String code,
                                     String message,
                                     T data) {
 

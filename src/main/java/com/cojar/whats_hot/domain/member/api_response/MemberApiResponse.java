@@ -1,4 +1,4 @@
-package com.cojar.whats_hot.index.api_response;
+package com.cojar.whats_hot.domain.member.api_response;
 
 import com.cojar.whats_hot.global.response.ResData;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,13 +13,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-public @interface IndexApiResponse {
+public @interface MemberApiResponse {
 
     @Target({ElementType.METHOD})
     @Retention(RetentionPolicy.RUNTIME)
     @Operation(
-            summary = "API 인덱스",
-            description = "사용가능한 API 링크들을 반환한다",
+            summary = "회원 로그인",
+            description = "성공 시 액세스 토큰을 발급한다",
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -30,16 +30,19 @@ public @interface IndexApiResponse {
                                             {
                                                 "status": "OK",
                                                 "success": true,
-                                                "code": "S-00-00",
-                                                "message": "인덱스 링크 목록을 반환합니다",
-                                                "_links": {
-                                                "self": {
-                                                    "href": "http://localhost:8080/api/index"
+                                                "code": "S-01-01",
+                                                "message": "액세스 토큰이 생성되었습니다",
+                                                "data": {
+                                                    "accessToken": "accessToken"
                                                 },
-                                                "profile": {
-                                                    "href": "http://localhost:8080/swagger-ui/index.html#/Index/index"
+                                                "_links": {
+                                                    "self": {
+                                                        "href": "http://localhost:8080/api/members/login"
+                                                    },
+                                                    "profile": {
+                                                        "href": "http://localhost:8080/swagger-ui/index.html#/Member/login"
+                                                    }
                                                 }
-                                             }
                                             }
                                             """
                                     )
@@ -47,6 +50,6 @@ public @interface IndexApiResponse {
                     )
             }
     )
-    public @interface Index {
+    public @interface Login {
     }
 }

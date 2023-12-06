@@ -1,35 +1,21 @@
 package com.cojar.whats_hot.global.util;
 
-import jakarta.transaction.Transactional;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
-
-    @Autowired
-    @Lazy
-    private AppConfig self;
-
-    @Bean
-    public ApplicationRunner runner() {
-        return args -> {
-          self.dataInitialize();
-        };
-    }
-
-    @Transactional
-    private void dataInitialize() {
-    }
 
     @Bean
     public ModelMapper modelMapper() {
@@ -50,5 +36,21 @@ public class AppConfig {
 
     public static String getBaseURL() {
         return ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
+    }
+
+    public static String toJson(Object object) {
+        try {
+            return new ObjectMapper().writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+    }
+
+    public static Map<String, Object> toMap(String jsonString) {
+        try {
+            return new ObjectMapper().readValue(jsonString, LinkedHashMap.class);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
     }
 }
