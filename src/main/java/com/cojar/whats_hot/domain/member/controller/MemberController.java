@@ -69,4 +69,20 @@ public class MemberController {
         return ResponseEntity.ok()
                 .body(resData);
     }
+
+    @MemberApiResponse.UpdatePassword
+    @PutMapping(value = "/me/password")
+    public ResponseEntity updatePassword(@Valid @RequestBody MemberRequest.UpdatePassword updatePassword, @AuthenticationPrincipal User user) {
+
+        ResData resData = ResData.of(
+                HttpStatus.OK,
+                "S-01-03",
+                "비밀번호 변경을 완료했습니다",
+                methodOn(this.getClass()).me(user)
+        );
+        resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/updatePassword").withRel("profile"));
+        return ResponseEntity.ok()
+                .body(resData);
+    }
+
 }

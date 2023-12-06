@@ -15,4 +15,17 @@ public class MemberRequest {
         @NotBlank
         private String password;
     }
+
+    @Getter
+    public static class UpdatePassword {
+
+        @NotBlank
+        private String oldPassword;
+
+        @NotBlank
+        private String newPassword;
+
+        @NotBlank
+        private String newPasswordConfirm;
+    }
 }

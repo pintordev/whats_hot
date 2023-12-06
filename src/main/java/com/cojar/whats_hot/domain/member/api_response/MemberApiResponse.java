@@ -99,4 +99,40 @@ public @interface MemberApiResponse {
     )
     public @interface Me {
     }
+
+    @Target({ElementType.METHOD})
+    @Retention(RetentionPolicy.RUNTIME)
+    @Operation(
+            summary = "회원 비밀번호 변경",
+            description = "현재 로그인된 회원의 비밀번호를 변경한다",
+            security = @SecurityRequirement(name = "bearerAuth"),
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "정상 응답",
+                            content = @Content(mediaType = MediaTypes.HAL_JSON_VALUE,
+                                    schema = @Schema(implementation = ResData.class),
+                                    examples = @ExampleObject(value = """
+                                            {
+                                                "status": "OK",
+                                                "success": true,
+                                                "code": "S-01-03",
+                                                "message": "비밀번호 변경을 완료했습니다",
+                                                "_links": {
+                                                    "self": {
+                                                        "href": "http://localhost:8080/api/members/me"
+                                                    },
+                                                    "profile": {
+                                                        "href": "http://localhost:8080/swagger-ui/index.html#/Member/updatePassword"
+                                                    }
+                                                }
+                                            }
+                                            """
+                                    )
+                            )
+                    )
+            }
+    )
+    public @interface UpdatePassword {
+    }
 }
