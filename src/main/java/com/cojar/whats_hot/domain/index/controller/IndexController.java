@@ -1,8 +1,8 @@
-package com.cojar.whats_hot.index.controller;
+package com.cojar.whats_hot.domain.index.controller;
 
 import com.cojar.whats_hot.global.response.ResData;
 import com.cojar.whats_hot.global.util.AppConfig;
-import com.cojar.whats_hot.index.api_response.IndexApiResponse;
+import com.cojar.whats_hot.domain.index.api_response.IndexApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;

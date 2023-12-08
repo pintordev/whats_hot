@@ -1,4 +1,4 @@
-package com.cojar.whats_hot.index.api_response;
+package com.cojar.whats_hot.domain.index.api_response;
 
 import com.cojar.whats_hot.global.response.ResData;
 import io.swagger.v3.oas.annotations.Operation;

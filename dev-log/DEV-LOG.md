@@ -1,6 +1,9 @@
 # What's Hot Dev-Log
 
 ## 23-12-06
+- [x] 엔티티 설계 완료
+
+## 23-12-06
 - [x] jwt 도입, member 로그인 적용, 응답 문서 작업
 - [x] /api/member/me 응답 및 api 문서 작업
 - [x] /api/member/me/password 응답 및 api 문서 작업

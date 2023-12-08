@@ -9,7 +9,7 @@ import com.cojar.whats_hot.domain.member.response.MemberResponse;
 import com.cojar.whats_hot.domain.member.service.MemberService;
 import com.cojar.whats_hot.global.response.ResData;
 import com.cojar.whats_hot.global.util.AppConfig;
-import com.cojar.whats_hot.index.controller.IndexController;
+import com.cojar.whats_hot.domain.index.controller.IndexController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
