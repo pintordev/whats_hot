@@ -28,6 +28,9 @@ public class Member extends BaseEntity {
     @Column(unique = true)
     private String email;
 
+    @Enumerated(value = EnumType.STRING)
+    private MemberStatus memberStatus;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Enumerated(value = EnumType.STRING)
     private List<MemberRole> authorities;
