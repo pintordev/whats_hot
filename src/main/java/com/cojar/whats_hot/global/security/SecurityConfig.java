@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/members/login").permitAll() // post:/api/members/login 아무나 접속 가능
                         .requestMatchers(HttpMethod.POST, "/api/members/username").permitAll() // post:/api/members/me/username 아무나 접속 가능
                         .requestMatchers(HttpMethod.POST, "/api/members/password").permitAll() // post:/api/members/me/username 아무나 접속 가능
-//                        .requestMatchers(HttpMethod.GET, "/api/events").permitAll() // get:/api/events 아무나 접속 가능
+                        .requestMatchers(HttpMethod.POST, "/api/spots").hasAuthority("admin") // post:/api/spots 관리자만 접속 가능
 //                        .requestMatchers(HttpMethod.GET, "/api/events/*").permitAll() // get:/api/events/# 아무나 접속 가능
                         .anyRequest().authenticated()) // 그 외는 인증된 사용자만 접속 가능
                 .cors(cors -> cors

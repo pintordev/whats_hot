@@ -32,4 +32,8 @@ public class SaveFile extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
+
+    public String toUri() {
+        return "image uri";
+    }
 }

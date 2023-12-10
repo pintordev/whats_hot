@@ -24,4 +24,17 @@ public class Category extends BaseEntity {
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Category> children;
+
+    public String toLine() {
+
+        Category category = this;
+        String[] names = new String[category.getDepth()];
+
+        while(category != null) {
+            names[category.getDepth() - 1] = category.getName();
+            category = category.getParent();
+        }
+
+        return String.join(" > ", names);
+    }
 }

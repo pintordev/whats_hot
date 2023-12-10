@@ -27,7 +27,7 @@ import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
-@Tag(name = "Member", description = "API 인덱스")
+@Tag(name = "Member", description = "회원 서비스 API")
 @RequestMapping(value = "/api/members", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaTypes.HAL_JSON_VALUE)
 @RequiredArgsConstructor
 @RestController
@@ -45,7 +45,6 @@ public class MemberController {
                 HttpStatus.CREATED,
                 "S-01-01",
                 "회원가입을 완료했습니다",
-                "",
                 linkTo(this.getClass()).slash("login")
         );
         resData.add(Link.of(AppConfig.getBaseURL() + "/swagger-ui/index.html#/Member/signup").withRel("profile"));

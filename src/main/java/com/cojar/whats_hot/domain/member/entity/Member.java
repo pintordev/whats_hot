@@ -40,7 +40,7 @@ public class Member extends BaseEntity {
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
         return this.authorities.stream()
-                .map(a -> new SimpleGrantedAuthority(a.name()))
+                .map(a -> new SimpleGrantedAuthority(a.getType()))
                 .collect(Collectors.toList());
     }
 

@@ -1,4 +1,4 @@
-package com.cojar.whats_hot.domain.service.entity;
+package com.cojar.whats_hot.domain.menu_item.entity;
 
 import com.cojar.whats_hot.domain.spot.entity.Spot;
 import com.cojar.whats_hot.global.jpa.BaseEntity;
@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @ToString(callSuper = true)
 @Entity
-public class Service extends BaseEntity {
+public class MenuItem extends BaseEntity {
 
     private String name;
 

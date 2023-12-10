@@ -9,9 +9,9 @@ public enum ReviewStatus {
     PUBLIC("public"),
     PRIVATE("private");
 
-    private String status;
+    private String type;
 
-    ReviewStatus(String status) {
-        this.status = status;
+    ReviewStatus(String type) {
+        this.type = type;
     }
 }

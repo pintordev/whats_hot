@@ -27,7 +27,8 @@ public class MemberDto {
         this.modifyDate = member.getModifyDate();
         this.username = member.getUsername();
         this.email = member.getEmail();
-        this.authorities = member.getAuthorities().stream().map(e -> e.getAuthority()).toList();
+        this.authorities = member.getAuthorities().stream()
+                .map(e -> e.getAuthority()).toList();
     }
 
     public static MemberDto of(Member member) {
